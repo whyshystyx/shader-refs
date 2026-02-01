@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Dissolve Shader Ref</title>
+<style>
+  html,body{margin:0;height:100%;background:#05060a;}
+  canvas{width:100%;height:100%;display:block;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+const img = new Image(); img.src = '../assets/sample.png';
+
+function resize(){
+  c.width = Math.min(960, window.innerWidth);
+  c.height = Math.min(540, window.innerHeight);
+}
+window.addEventListener('resize', resize); resize();
+let t = 0;
+
+function draw(){
+  t += 0.008;
+  const w = c.width, h = c.height;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = '#05060a';
+  ctx.fillRect(0,0,w,h);
+
+  if(img.complete){
+    const s = Math.min(w,h)*0.8;
+    const x = (w-s)/2, y = (h-s)/2;
+
+    // draw image
+    ctx.drawImage(img, x, y, s, s);
+
+    // noise dissolve mask
+    const imgData = ctx.getImageData(x, y, s, s);
+    const d = imgData.data;
+    const threshold = (Math.sin(t*2) * 0.5 + 0.5) * 255;
+    for(let i=0;i<d.length;i+=4){
+      const n = (d[i] + d[i+1] + d[i+2]) / 3;
+      if(n < threshold){ d[i+3] = 0; }
+    }
+    ctx.putImageData(imgData, x, y);
+  }
+
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

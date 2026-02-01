@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Hologram Shader Ref</title>
+<title>Bloom Shader Ref</title>
 <style>
-  html,body{margin:0;height:100%;background:#030709;}
+  html,body{margin:0;height:100%;background:#05070a;}
   canvas{width:100%;height:100%;display:block;}
 </style>
 </head>
@@ -20,52 +20,27 @@ function resize(){
   c.height = Math.min(540, window.innerHeight);
 }
 window.addEventListener('resize', resize); resize();
-let t = 0;
 
 function draw(){
-  t += 0.016;
   const w = c.width, h = c.height;
   ctx.clearRect(0,0,w,h);
-  ctx.fillStyle = '#031014';
+  ctx.fillStyle = '#05070a';
   ctx.fillRect(0,0,w,h);
 
   if(img.complete){
-    const s = Math.min(w,h)*0.78;
+    const s = Math.min(w,h)*0.8;
     const x = (w-s)/2, y = (h-s)/2;
-
-    // base
-    ctx.globalAlpha = 0.9;
     ctx.drawImage(img, x, y, s, s);
 
-    // glow
+    // bloom glow
     ctx.globalCompositeOperation = 'screen';
-    ctx.filter = 'blur(6px)';
-    ctx.globalAlpha = 0.25;
+    ctx.filter = 'blur(10px)';
+    ctx.globalAlpha = 0.35;
     ctx.drawImage(img, x, y, s, s);
     ctx.filter = 'none';
-    ctx.globalCompositeOperation = 'source-over';
     ctx.globalAlpha = 1.0;
-
-    // row glitch
-    for(let i=0;i<10;i++){
-      const ry = y + Math.random()*s;
-      const rh = 2 + Math.random()*4;
-      const ox = (Math.random()-0.5)*6;
-      ctx.drawImage(img, x+ox, ry, s, rh, x, ry, s, rh);
-    }
+    ctx.globalCompositeOperation = 'source-over';
   }
-
-  // scanlines
-  ctx.globalAlpha = 0.25;
-  ctx.fillStyle = '#000';
-  for(let y=0;y<h;y+=2){ ctx.fillRect(0,y,w,1); }
-  ctx.globalAlpha = 1.0;
-
-  // cyan tint
-  ctx.globalCompositeOperation = 'screen';
-  ctx.fillStyle = 'rgba(0,255,220,0.12)';
-  ctx.fillRect(0,0,w,h);
-  ctx.globalCompositeOperation = 'source-over';
 
   requestAnimationFrame(draw);
 }

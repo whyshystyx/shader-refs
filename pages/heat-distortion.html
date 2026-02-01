@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Heat Distortion Shader Ref</title>
+<style>
+  html,body{margin:0;height:100%;background:#05060a;}
+  canvas{width:100%;height:100%;display:block;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+const img = new Image(); img.src = '../assets/sample.png';
+
+function resize(){
+  c.width = Math.min(960, window.innerWidth);
+  c.height = Math.min(540, window.innerHeight);
+}
+window.addEventListener('resize', resize); resize();
+let t = 0;
+
+function draw(){
+  t += 0.016;
+  const w = c.width, h = c.height;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = '#05060a';
+  ctx.fillRect(0,0,w,h);
+
+  if(img.complete){
+    const s = Math.min(w,h)*0.8;
+    const x = (w-s)/2, y = (h-s)/2;
+
+    // draw in thin strips with x-offset
+    for(let i=0;i<200;i++){
+      const ry = y + (s/200)*i;
+      const rh = s/200;
+      const ox = Math.sin(t*2 + i*0.15) * 3;
+      ctx.drawImage(img, x+ox, ry, s, rh, x, ry, s, rh);
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

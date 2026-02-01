@@ -1,7 +1,15 @@
-# Shader Refs (Obsidian embed)
+# Shader Refs (Demo Only)
 
-- CRT: https://whyshystyx.github.io/shader-refs/pages/crt.md
-- Hologram: https://whyshystyx.github.io/shader-refs/pages/hologram.md
-- Tilt: https://whyshystyx.github.io/shader-refs/pages/tilt.md
+GitHub Pages hosts **demo HTML only**. Documentation lives in Obsidian.
 
-Open each page for embed + GLSL + implementation notes.
+Demos:
+- /pages/crt.html
+- /pages/hologram.html
+- /pages/tilt.html
+- /pages/bloom.html
+- /pages/chromatic-aberration.html
+- /pages/vignette.html
+- /pages/pixelate.html
+- /pages/gaussian-blur.html
+- /pages/heat-distortion.html
+- /pages/dissolve.html
