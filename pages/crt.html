@@ -9,21 +9,24 @@
 <canvas id="c"></canvas>
 <script>
 const c=document.getElementById('c');const ctx=c.getContext('2d');
+const img=new Image(); img.src='../assets/sample.png';
 function resize(){c.width=window.innerWidth; c.height=window.innerHeight;}
 window.addEventListener('resize',resize);resize();
 let t=0;
 function draw(){
   t+=0.016; const w=c.width,h=c.height; ctx.fillStyle='#0b0f14'; ctx.fillRect(0,0,w,h);
-  // fake scanlines
+  // draw sprite center
+  if(img.complete){
+    const s=Math.min(w,h)*0.6; const x=w*0.5-s*0.5; const y=h*0.5-s*0.5;
+    ctx.drawImage(img,x,y,s,s);
+  }
+  // scanlines
   ctx.globalAlpha=0.25; ctx.fillStyle='#000';
   for(let y=0;y<h;y+=2){ctx.fillRect(0,y,w,1);} ctx.globalAlpha=1.0;
   // vignette
   const g=ctx.createRadialGradient(w*0.5,h*0.5,Math.min(w,h)*0.2,w*0.5,h*0.5,Math.min(w,h)*0.7);
   g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(0,0,0,0.6)');
   ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-  // glow text
-  ctx.font='48px sans-serif'; ctx.fillStyle='#7df'; ctx.shadowColor='#4ff'; ctx.shadowBlur=20;
-  ctx.fillText('CRT REF', 40, 80); ctx.shadowBlur=0;
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);

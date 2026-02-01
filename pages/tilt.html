@@ -3,10 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <title>Tilt Shader Ref</title>
-<style>html,body{margin:0;height:100%;background:#0b0f14;}#card{width:320px;height:200px;background:#1b2230;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform-style:preserve-3d;}</style>
+<style>html,body{margin:0;height:100%;background:#0b0f14;display:flex;align-items:center;justify-content:center;}
+#card{width:320px;height:220px;border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform-style:preserve-3d;background:#1b2230;}
+#card img{width:80%;height:80%;object-fit:contain;transform:translateZ(20px);}
+</style>
 </head>
 <body>
-<div id="card">TILT REF</div>
+<div id="card"><img src="../assets/sample.png" /></div>
 <script>
 const card=document.getElementById('card');
 document.addEventListener('mousemove', e=>{
