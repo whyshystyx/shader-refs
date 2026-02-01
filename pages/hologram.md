@@ -1,5 +1,8 @@
 # 홀로그램 효과 레퍼런스
 
+## 샘플 이미지
+![sample](../assets/sample.jpg)
+
 ## Live Embed
 <iframe src="./hologram.html" width="100%" height="360" style="border:1px solid #333;"></iframe>
 

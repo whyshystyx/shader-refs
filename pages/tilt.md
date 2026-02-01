@@ -1,5 +1,8 @@
 # 마우스 틸팅 효과 레퍼런스
 
+## 샘플 이미지
+![sample](../assets/sample.jpg)
+
 ## Live Embed
 <iframe src="./tilt.html" width="100%" height="300" style="border:1px solid #333;"></iframe>
 
