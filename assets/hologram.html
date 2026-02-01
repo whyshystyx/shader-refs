@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Hologram Shader Ref</title>
+<style>html,body{margin:0;height:100%;background:#05070a;}canvas{width:100%;height:100%;display:block;}</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const c=document.getElementById('c');const ctx=c.getContext('2d');
+function resize(){c.width=window.innerWidth; c.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+let t=0;
+function draw(){
+  t+=0.016; const w=c.width,h=c.height; ctx.clearRect(0,0,w,h);
+  // background glow
+  const bg=ctx.createLinearGradient(0,0,0,h);
+  bg.addColorStop(0,'#041018'); bg.addColorStop(1,'#02060a'); ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+  // hologram stripes
+  ctx.globalAlpha=0.35; ctx.fillStyle='#3ff';
+  for(let y=0;y<h;y+=6){ctx.fillRect(0,y,w,2);} ctx.globalAlpha=1.0;
+  // floating cube
+  const cx=w*0.5, cy=h*0.5 + Math.sin(t)*10; const s=120;
+  ctx.strokeStyle='rgba(80,255,255,0.8)'; ctx.lineWidth=2;
+  ctx.strokeRect(cx-s*0.5, cy-s*0.5, s, s);
+  ctx.strokeRect(cx-s*0.35, cy-s*0.65, s, s);
+  ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy-s*0.5); ctx.lineTo(cx-s*0.35, cy-s*0.65);
+  ctx.moveTo(cx+s*0.5, cy-s*0.5); ctx.lineTo(cx+s*0.65, cy-s*0.65);
+  ctx.moveTo(cx+s*0.5, cy+s*0.5); ctx.lineTo(cx+s*0.65, cy+s*0.35);
+  ctx.moveTo(cx-s*0.5, cy+s*0.5); ctx.lineTo(cx-s*0.35, cy+s*0.35);
+  ctx.stroke();
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>
