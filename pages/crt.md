@@ -1,8 +1,5 @@
 # CRT 효과 레퍼런스
 
-## 샘플 이미지
-![sample](../assets/sample.jpg)
-
 ## Live Embed
 <iframe src="./crt.html" width="100%" height="360" style="border:1px solid #333;"></iframe>
 
@@ -37,6 +34,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 ## 구현 방법/해설
 - **Scanlines**: 화면 Y좌표에 사인 함수를 적용해 줄무늬를 만든다.
 - **Vignette**: 화면 중심에서 멀어질수록 어두워지도록 `dot(p,p)` 기반 감쇠.
+- **Sprite 사용**: `sample.png`를 텍스처로 적용해 왜곡/노이즈 확인 가능.
 
 ### 주요 변수
 - `scanline_freq`: 줄 간격. 높을수록 촘촘.

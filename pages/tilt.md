@@ -1,8 +1,5 @@
 # 마우스 틸팅 효과 레퍼런스
 
-## 샘플 이미지
-![sample](../assets/sample.jpg)
-
 ## Live Embed
 <iframe src="./tilt.html" width="100%" height="300" style="border:1px solid #333;"></iframe>
 
@@ -27,6 +24,7 @@ void main(){
 ## 구현 방법/해설
 - 마우스 좌표를 **0..1 정규화**한 뒤, X/Y 회전 각도로 변환.
 - UI 카드, 아이템, 캐릭터 초상 등 **입체감 강조 요소**에 효과적.
+- **Sprite 사용**: `sample.png`를 카드 텍스처로 매핑하면 효과 확인 가능.
 
 ### 주요 변수
 - `tilt_strength_x/y`: 회전 강도.

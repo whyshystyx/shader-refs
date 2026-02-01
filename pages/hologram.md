@@ -1,8 +1,5 @@
 # 홀로그램 효과 레퍼런스
 
-## 샘플 이미지
-![sample](../assets/sample.jpg)
-
 ## Live Embed
 <iframe src="./hologram.html" width="100%" height="360" style="border:1px solid #333;"></iframe>
 
@@ -35,6 +32,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 ## 구현 방법/해설
 - **Holo Glow**: 중심부에 청록 발광을 주어 홀로그램 느낌을 강조.
 - **Scanlines**: 빠르게 흐르는 줄무늬를 얇게 얹어 디지털 감각 추가.
+- **Sprite 사용**: `sample.png`를 텍스처로 사용해 효과 확인 가능.
 
 ### 주요 변수
 - `scan_freq`: 줄 간격. 높을수록 촘촘.
